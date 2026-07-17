@@ -3,6 +3,7 @@
 
 #include <MenuItemInterface.h>
 
+#include "menu_items/ArduinoMenu.h"
 #include "menu_items/BleMenu.h"
 #include "menu_items/ClockMenu.h"
 #include "menu_items/ConfigMenu.h"
@@ -30,6 +31,7 @@ public:
     GpsMenu gpsMenu;
     IRMenu irMenu;
     NRF24Menu nrf24Menu;
+    ArduinoMenu arduinoMenu;
     OthersMenu othersMenu;
     RFIDMenu rfidMenu;
     RFMenu rfMenu;

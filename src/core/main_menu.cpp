@@ -20,6 +20,9 @@ MainMenu::MainMenu() {
         &ethernetMenu,
 #endif
         &gpsMenu,
+
+        &arduinoMenu,
+
         &rfidMenu,
         &fileMenu,
 #if !defined(LITE_VERSION) && !defined(DISABLE_INTERPRETER)
@@ -32,7 +35,6 @@ MainMenu::MainMenu() {
 
     _totalItems = _menuItems.size();
 }
-
 MainMenu::~MainMenu() {}
 
 void MainMenu::begin(void) {
