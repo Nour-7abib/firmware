@@ -1,14 +1,26 @@
 #include "ArduinoMenu.h"
 
+#include "../arduino/ArduinoManager.h"
 #include "core/display.h"
 #include "core/utils.h"
 
 void ArduinoMenu::optionsMenu() {
+
     options = {
-        {"UART Test", []() { displayError("UART Test OK"); }},
+        {"Serial Monitor",
+         []() {
+             arduinoManager.openSerialMonitor();
+             displayError("Serial Monitor Started");
+         }                     },
+
+        {"UART Test",      []() {
+             Serial.println("UART TEST OK");
+             displayError("UART Test OK");
+         }},
     };
 
     addOptionToMainMenu();
+
     loopOptions(options, MENU_TYPE_SUBMENU, "Arduino");
 }
 
