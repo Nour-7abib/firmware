@@ -1,23 +1,20 @@
 #include "ArduinoMenu.h"
 
-#include "../arduino/ArduinoManager.h"
+#include "core/arduino/ArduinoManager.h"
+#include "core/arduino/PinTools.h"
 #include "core/display.h"
 #include "core/utils.h"
 
 void ArduinoMenu::optionsMenu() {
 
-    options = {
-        {"Serial Monitor",
-         []() {
-             arduinoManager.openSerialMonitor();
-             displayError("Serial Monitor Started");
-         }                     },
+    options.clear();
 
-        {"UART Test",      []() {
-             Serial.println("UART TEST OK");
-             displayError("UART Test OK");
-         }},
-    };
+    options.push_back({"GPIO Tools", []() { pinTools.menu(); }});
+
+    options.push_back({"UART Test", []() {
+                           Serial.println("Arduino UART OK");
+                           displayError("UART OK");
+                       }});
 
     addOptionToMainMenu();
 
