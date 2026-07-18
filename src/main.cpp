@@ -1,3 +1,4 @@
+#include "core/arduino/ArduinoManager.h"
 #include "core/main_menu.h"
 #include <globals.h>
 
@@ -412,10 +413,11 @@ void startup_sound() {
  **  Where the devices are started and variables set
  *********************************************************************/
 void setup() {
-    Serial.setRxBufferSize(
-        SAFE_STACK_BUFFER_SIZE / 4
-    ); // Must be invoked before Serial.begin(). Default is 256 chars
+    Serial.setRxBufferSize(SAFE_STACK_BUFFER_SIZE / 4);
+
     Serial.begin(115200);
+
+    arduinoManager.begin();
 
     log_d("Total heap: %d", ESP.getHeapSize());
     log_d("Free heap: %d", ESP.getFreeHeap());
