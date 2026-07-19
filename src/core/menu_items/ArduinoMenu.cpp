@@ -9,34 +9,25 @@ void ArduinoMenu::optionsMenu() {
 
     options.clear();
 
-    options.push_back({"GPIO Tools", []() { pinTools.menu(); }});
+    options.push_back({"Detect UNO", []() {
+                           if (arduinoManager.detectUno()) {
+                               displayError("UNO CONNECTED");
+                           } else {
+                               displayError("UNO NOT FOUND");
+                           }
+                       }});
 
-    options.push_back({"UART Test", []() {
-                           Serial.println("Arduino UART OK");
-                           displayError("UART OK");
+    options.push_back({"Read RFID", []() {
+                           String result = arduinoManager.readRfid();
+
+                           displayError(result);
+                       }});
+
+    options.push_back({"GPIO Tools", []() {
+                           pinTools.menu();
                        }});
 
     addOptionToMainMenu();
 
     loopOptions(options, MENU_TYPE_SUBMENU, "Arduino");
-}
-
-void ArduinoMenu::drawIcon(float scale) {
-    clearIconArea();
-
-    int radius = scale * 7;
-
-    tft.drawCircle(iconCenterX, iconCenterY, radius * 3, bruceConfig.priColor);
-
-    tft.fillCircle(iconCenterX - radius, iconCenterY, radius, bruceConfig.priColor);
-
-    tft.fillCircle(iconCenterX + radius, iconCenterY, radius, bruceConfig.priColor);
-
-    tft.drawLine(
-        iconCenterX - radius * 2,
-        iconCenterY + radius * 2,
-        iconCenterX + radius * 2,
-        iconCenterY + radius * 2,
-        bruceConfig.priColor
-    );
 }

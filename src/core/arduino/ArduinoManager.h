@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+
 class ArduinoManager {
 public:
     ArduinoManager();
@@ -7,16 +9,17 @@ public:
     void begin();
     void update();
 
-    // Serial
+    String sendCommand(const String &command, uint32_t timeout = 1500);
+
+    bool detectUno();
+    String readRfid();
+
     void openSerialMonitor();
-
-    // GPIO
     void openPinTools();
-
-    // I2C
     void openI2CTools();
 
 private:
+    HardwareSerial _unoSerial;
     bool _initialized;
 };
 
